@@ -20,6 +20,8 @@ const CoinItem = ({ coin }) => {
         }
     }
 
+    const percentageColor = price_change_percentage_24h > 0 ? '#16c784' : '#ea3943';
+
     return (
         <View style={styles.coinContainer}>
             <Image
@@ -32,17 +34,18 @@ const CoinItem = ({ coin }) => {
                     <Text style={styles.rank}>{market_cap_rank}</Text>
                     <Text style={styles.text}>{symbol.toUpperCase()}</Text>
                     <AntDesign
-                        name="caretdown"
-                        size={12} color="#fff"
+                        name={price_change_percentage_24h > 0 ? 'caretup' : 'caretdown'}
+                        size={12}
+                        color={percentageColor}
                         style={{ alignSelf: 'center', marginRight: 5 }}
                     />
-                    <Text style={styles.text}>{price_change_percentage_24h.toFixed(2)}%</Text>
+                    <Text style={{ color: percentageColor }}>{price_change_percentage_24h.toFixed(2)}%</Text>
                 </View>
             </View>
 
-            <View style={{ marginLeft: 'auto' }}>
+            <View style={{ marginLeft: 'auto', alignItems: "flex-end" }}>
                 <Text style={styles.title}>{current_price}</Text>
-                <Text style={styles.text}>MCap {normalizeMarketCap(market_cap)}</Text>
+                <Text style={{ color: '#fff', fontSize: 11 }}>MCap {normalizeMarketCap(market_cap)}</Text>
             </View>
         </View>
     );
